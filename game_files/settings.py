@@ -7,3 +7,8 @@ def parse_arguments():
                         help='Вибір складності гри')
     parser.add_argument('--bg_color', type=str, default='255,255,255', help='Колір фону у форматі RGB')
     return parser.parse_args()
+
+def get_background_color(args):
+    # Парсимо колір фону у формат RGB
+    color = tuple(map(int, args.bg_color.split(',')))
+    return color
