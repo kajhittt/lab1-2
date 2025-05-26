@@ -13,6 +13,6 @@ def main():
     game = CarRacingGame(background_color, args.difficulty)
     game.run()
 
-if name == 'main':
+if __name__ == '__main__':
     pygame.init()
     main()
