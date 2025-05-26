@@ -2,9 +2,11 @@ name: Python CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   test:
@@ -14,10 +16,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python
+    - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.8'
 
     - name: Install dependencies
       run: |
@@ -26,20 +28,20 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        pytest --maxfail=5 --disable-warnings -q
+        pytest --maxfail=5 --disable-warnings -q --html=pytest-report.html
 
     - name: Check code style with flake8
       run: |
-        flake8 .
+        flake8 . --max-line-length=120 --format=html --output-file=flake8-report.html
 
     - name: Upload pytest result as HTML report
       uses: actions/upload-artifact@v2
       with:
         name: pytest-report
-        path: pytest-report.html
+        path: pytest-report.html  # Вказуємо правильний шлях до звіту
 
     - name: Upload flake8 result as HTML report
       uses: actions/upload-artifact@v2
       with:
         name: flake8-report
-        path: flake8-report.html
+        path: flake8-report.html  # Вказуємо правильний шлях до звіту
