@@ -13,3 +13,10 @@ def create_car(x, y, car_image):
     """Створити об'єкт машини"""
     car = pygame.Rect(x, y, car_image.get_width(), car_image.get_height())
     return car
+
+def create_bonus():
+    """Створити бонус"""
+    x = random.randint(50, SCREEN_WIDTH - 50)
+    y = -50  # Початкове положення за межами екрана
+    bonus = pygame.Rect(x, y, load_image(BONUS_IMAGE).get_width(), load_image(BONUS_IMAGE).get_height())
+    return bonus
