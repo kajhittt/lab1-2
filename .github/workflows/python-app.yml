@@ -37,7 +37,8 @@ jobs:
     # Крок 5: Перевірка стилю коду з flake8 та генерація HTML звіту
     - name: Check code style with flake8 and generate HTML report
       run: |
-        flake8 . --max-line-length=120 --format=html --output-file=flake8-report.html  # Генерація HTML-звіту для лінтингу
+        mkdir -p reports  # Створення директорії для звітів
+        flake8 . --max-line-length=120 --format=html --htmldir=reports --output-file=reports/flake8-report.html  # Генерація HTML-звіту для лінтингу
 
     # Крок 6: Вивести всі файли в директорії для відлагодження
     - name: List files (for debugging)
@@ -55,4 +56,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: flake8-report
-        path: flake8-report.html  # Вказуємо правильний шлях до звіту
+        path: reports/flake8-report.html  # Вказуємо правильний шлях до звіту
