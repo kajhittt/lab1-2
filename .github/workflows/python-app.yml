@@ -3,43 +3,54 @@ name: Python CI
 on:
   push:
     branches:
-      - main
+      - main  # Запуск на кожен коміт в основну гілку
   pull_request:
     branches:
-      - main
+      - main  # Запуск на кожен pull request в основну гілку
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
+    # Крок 1: Клонуємо репозиторій
     - name: Checkout code
       uses: actions/checkout@v2
 
+    # Крок 2: Налаштовуємо Python
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
         python-version: '3.8'
 
+    # Крок 3: Встановлюємо залежності
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requirements.txt  # Встановлюємо залежності з requirements.txt
 
-    - name: Run tests with pytest
+    # Крок 4: Запуск тестів з pytest та генерація HTML звіту
+    - name: Run tests with pytest and generate HTML report
       run: |
-        pytest --maxfail=5 --disable-warnings -q --html=pytest-report.html
+        pytest --maxfail=5 --disable-warnings -q --html=pytest-report.html  # Генерація HTML-звіту для тестів
 
-    - name: Check code style with flake8
+    # Крок 5: Перевірка стилю коду з flake8 та генерація HTML звіту
+    - name: Check code style with flake8 and generate HTML report
       run: |
-        flake8 . --max-line-length=120 --format=html --output-file=flake8-report.html
+        flake8 . --max-line-length=120 --format=html --output-file=flake8-report.html  # Генерація HTML-звіту для лінтингу
 
+    # Крок 6: Вивести всі файли в директорії для відлагодження
+    - name: List files (for debugging)
+      run: ls -l  # Вивести список файлів для перевірки, чи згенерувались звіти
+
+    # Крок 7: Завантаження звіту pytest як артефакт
     - name: Upload pytest result as HTML report
       uses: actions/upload-artifact@v2
       with:
         name: pytest-report
         path: pytest-report.html  # Вказуємо правильний шлях до звіту
 
+    # Крок 8: Завантаження звіту flake8 як артефакт
     - name: Upload flake8 result as HTML report
       uses: actions/upload-artifact@v2
       with:
