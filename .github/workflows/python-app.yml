@@ -43,17 +43,3 @@ jobs:
     # Крок 6: Вивести всі файли в директорії для відлагодження
     - name: List files (for debugging)
       run: ls -l  # Вивести список файлів для перевірки, чи згенерувались звіти
-
-    # Крок 7: Завантаження звіту pytest як артефакт
-    - name: Upload pytest result as HTML report
-      uses: actions/upload-artifact@v2
-      with:
-        name: pytest-report
-        path: pytest-report.html  # Вказуємо правильний шлях до звіту
-
-    # Крок 8: Завантаження звіту flake8 як артефакт
-    - name: Upload flake8 result as HTML report
-      uses: actions/upload-artifact@v2
-      with:
-        name: flake8-report
-        path: reports/flake8-report.html  # Вказуємо правильний шлях до звіту
