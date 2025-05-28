@@ -1,8 +1,7 @@
 import pygame
-import random  # Імпортуємо стандартний модуль random
+import random  
 from game_files.config import SCREEN_WIDTH, SCREEN_HEIGHT, ROAD_IMAGE, CAR_IMAGE, BONUS_IMAGE, EXPLOSION_IMAGE, FPS
-from game_files.settings import get_background_color
-from game_files.utils import load_image, create_car, create_bonus
+from game_files.utils import load_image
 
 class CarRacingGame:
     def __init__(self, background_color, difficulty):

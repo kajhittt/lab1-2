@@ -1,7 +1,6 @@
 import pytest
 from game_files.game import CarRacingGame
 from unittest.mock import patch
-import random
 
 @pytest.fixture
 def game():
